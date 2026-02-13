@@ -32,7 +32,7 @@ Put base URL and token directly in the MCP server env block:
       "command": "node",
       "args": ["/ABSOLUTE/PATH/TO/openclaw-task-mcp/src/index.js"],
       "env": {
-        "OPENCLAW_BASE_URL": "https://claw.pve.realm.bz",
+        "OPENCLAW_BASE_URL": "http://127.0.0.1:18789",
         "OPENCLAW_API_TOKEN": "your-gateway-token",
         "OPENCLAW_TIMEOUT_MS": "30000"
       }
@@ -52,7 +52,7 @@ No separate HTTP MCP endpoint is needed in this mode; the app launches this proc
 ## Local run (manual)
 
 ```bash
-OPENCLAW_BASE_URL="https://claw.pve.realm.bz" \
+OPENCLAW_BASE_URL="http://127.0.0.1:18789" \
 OPENCLAW_API_TOKEN="YOUR_TOKEN" \
 node src/index.js
 ```
