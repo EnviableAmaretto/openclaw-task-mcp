@@ -4,7 +4,7 @@ import { OpenClawClient } from "../src/openclaw-client.js";
 describe("OpenClawClient", () => {
   beforeEach(() => vi.restoreAllMocks());
 
-  it("calls /tools/invoke with tool/params (plus legacy fields)", async () => {
+  it("calls /tools/invoke with tool/args/params (plus legacy fields)", async () => {
     global.fetch = vi.fn().mockResolvedValue({
       ok: true,
       text: async () => JSON.stringify({ data: { x: 1 } }),
@@ -19,6 +19,7 @@ describe("OpenClawClient", () => {
         method: "POST",
         body: JSON.stringify({
           tool: "sessions_list",
+          args: { limit: 1 },
           params: { limit: 1 },
           invokeCommand: "sessions_list",
           invokeParamsJson: JSON.stringify({ limit: 1 }),

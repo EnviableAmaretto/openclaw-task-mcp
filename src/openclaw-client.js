@@ -29,6 +29,7 @@ export class OpenClawClient {
         // Send both modern and legacy shapes for compatibility across OpenClaw versions.
         body: JSON.stringify({
           tool: invokeCommand,
+          args: params,
           params,
           invokeCommand,
           invokeParamsJson: JSON.stringify(params),

@@ -17,6 +17,7 @@ describe("smoke regression guards", () => {
     const [, req] = fetchImpl.mock.calls[0];
     const body = JSON.parse(req.body);
     expect(body.tool).toBe("sessions_list");
+    expect(body.args).toEqual({ limit: 1 });
     expect(body.params).toEqual({ limit: 1 });
     expect(body.invokeCommand).toBe("sessions_list");
     expect(body.invokeParamsJson).toBe(JSON.stringify({ limit: 1 }));
