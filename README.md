@@ -68,6 +68,7 @@ npm test
 
 - Local pre-push hook (`.githooks/pre-push`) runs `npm test`.
 - CI (`.github/workflows/ci.yml`) runs `npm ci && npm test` on push/PR.
+- **Mandatory before commit:** launch MCP server (`npm start`) and execute at least one real E2E MCP call successfully. Tests alone are not sufficient.
 
 ## Security notes
 
