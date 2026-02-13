@@ -2,7 +2,7 @@
 
 ## Non-negotiable pre-commit / pre-push rule
 
-If you change code in this repository, **do not commit** until all checks below pass:
+If you change code in this repository, **do not commit** until all checks below pass. Skipping this is unacceptable and treated as a failed workflow:
 
 1. **Unit + smoke tests**
    - Run: `npm test`
