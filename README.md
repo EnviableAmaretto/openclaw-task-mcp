@@ -16,7 +16,8 @@ Tools:
 ## Install
 
 ```bash
-git clone <YOUR_REPO_URL> openclaw-task-mcp
+cd /home/sillytavern/SillyTavern/repositories
+git clone https://github.com/EnviableAmaretto/openclaw-task-mcp.git
 cd openclaw-task-mcp
 npm install
 ```
