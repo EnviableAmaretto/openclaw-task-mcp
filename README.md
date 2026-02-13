@@ -19,6 +19,7 @@ Tools:
 git clone https://github.com/EnviableAmaretto/openclaw-task-mcp.git
 cd openclaw-task-mcp
 npm install
+npm run hooks:install
 ```
 
 ## MCP config (Claude-code style / SillyTavern-style)
@@ -62,6 +63,11 @@ node src/index.js
 ```bash
 npm test
 ```
+
+## Quality gates
+
+- Local pre-push hook (`.githooks/pre-push`) runs `npm test`.
+- CI (`.github/workflows/ci.yml`) runs `npm ci && npm test` on push/PR.
 
 ## Security notes
 

@@ -8,7 +8,10 @@
   },
   "scripts": {
     "start": "node src/index.js",
-    "test": "vitest run"
+    "test": "npm run test:unit && npm run test:smoke",
+    "test:unit": "vitest run",
+    "test:smoke": "vitest run test/smoke.test.js",
+    "hooks:install": "git config core.hooksPath .githooks"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.17.5",
