@@ -15,8 +15,11 @@ const listTasksSchema = z.object({
 });
 
 const getTaskStatusSchema = z.object({
-  sessionId: z.string().min(1),
+  sessionId: z.string().min(1).optional(),
+  sessionKey: z.string().min(1).optional(),
   includeResult: z.boolean().default(true),
+}).refine((v) => Boolean(v.sessionId || v.sessionKey), {
+  message: "sessionId or sessionKey is required",
 });
 
 export const TOOL_DEFS = [
@@ -80,7 +83,7 @@ export async function handleToolCall(client, name, rawArgs = {}, subagentTag = "
     const args = startTaskSchema.parse(rawArgs);
     const result = await client.invoke("sessions_spawn", {
       label: args.title,
-      prompt: args.prompt,
+      task: args.prompt,
       requesterSession: args.requesterSession,
       channel: args.channel,
       metadata: { ...(args.metadata || {}), taskType: subagentTag },
@@ -105,8 +108,9 @@ export async function handleToolCall(client, name, rawArgs = {}, subagentTag = "
 
   if (name === "get_task_status") {
     const args = getTaskStatusSchema.parse(rawArgs);
+    const sessionKey = args.sessionKey || args.sessionId;
     const history = await client.invoke("sessions_history", {
-      sessionId: args.sessionId,
+      sessionKey,
       limit: 200,
     });
 
@@ -115,7 +119,7 @@ export async function handleToolCall(client, name, rawArgs = {}, subagentTag = "
     const resultEntry = [...items].reverse().find((i) => i?.type === "result" || i?.result !== undefined) || null;
 
     return asText({
-      sessionId: args.sessionId,
+      sessionId: sessionKey,
       status: last?.status || "unknown",
       lastEvent: last,
       eventCount: items.length,

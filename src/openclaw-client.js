@@ -26,7 +26,13 @@ export class OpenClawClient {
           "Content-Type": "application/json",
           ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}),
         },
-        body: JSON.stringify({ invokeCommand, invokeParamsJson: JSON.stringify(params) }),
+        // Send both modern and legacy shapes for compatibility across OpenClaw versions.
+        body: JSON.stringify({
+          tool: invokeCommand,
+          params,
+          invokeCommand,
+          invokeParamsJson: JSON.stringify(params),
+        }),
         signal: controller.signal,
       });
 

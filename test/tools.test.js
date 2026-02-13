@@ -5,7 +5,7 @@ describe("tools", () => {
   it("start_task maps to sessions_spawn", async () => {
     const client = { invoke: vi.fn().mockResolvedValue({ status: "accepted", sessionId: "abc" }) };
     const out = await handleToolCall(client, "start_task", { title: "build", prompt: "do x" }, "subagent");
-    expect(client.invoke).toHaveBeenCalledWith("sessions_spawn", expect.objectContaining({ label: "build", prompt: "do x" }));
+    expect(client.invoke).toHaveBeenCalledWith("sessions_spawn", expect.objectContaining({ label: "build", task: "do x" }));
     expect(out.content[0].text).toContain("accepted");
   });
 
@@ -34,6 +34,7 @@ describe("tools", () => {
     };
 
     const out = await handleToolCall(client, "get_task_status", { sessionId: "s-1" }, "subagent");
+    expect(client.invoke).toHaveBeenCalledWith("sessions_history", expect.objectContaining({ sessionKey: "s-1" }));
     const parsed = JSON.parse(out.content[0].text);
     expect(parsed.status).toBe("done");
     expect(parsed.result).toEqual({ ok: true });
