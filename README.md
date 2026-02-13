@@ -16,7 +16,6 @@ Tools:
 ## Install
 
 ```bash
-cd /home/sillytavern/SillyTavern/repositories
 git clone https://github.com/EnviableAmaretto/openclaw-task-mcp.git
 cd openclaw-task-mcp
 npm install
@@ -31,7 +30,7 @@ Put base URL and token directly in the MCP server env block:
   "mcpServers": {
     "openclaw": {
       "command": "node",
-      "args": ["/home/sillytavern/SillyTavern/repositories/openclaw-task-mcp/src/index.js"],
+      "args": ["/ABSOLUTE/PATH/TO/openclaw-task-mcp/src/index.js"],
       "env": {
         "OPENCLAW_BASE_URL": "https://claw.pve.realm.bz",
         "OPENCLAW_API_TOKEN": "your-gateway-token",
@@ -41,6 +40,12 @@ Put base URL and token directly in the MCP server env block:
   }
 }
 ```
+
+`args[0]` must be the absolute path where **you** cloned this repository on your host.
+Examples:
+- `/home/sillytavern/SillyTavern/repositories/openclaw-task-mcp/src/index.js`
+- `/opt/openclaw-task-mcp/src/index.js`
+- `/srv/mcp/openclaw-task-mcp/src/index.js`
 
 No separate HTTP MCP endpoint is needed in this mode; the app launches this process over stdio.
 
