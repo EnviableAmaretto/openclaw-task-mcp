@@ -1,7 +1,7 @@
 {
   "name": "openclaw-task-mcp",
-  "version": "0.1.0",
-  "description": "MCP server over Streamable HTTP for OpenClaw task lifecycle",
+  "version": "0.2.0",
+  "description": "Node stdio MCP server for OpenClaw task lifecycle",
   "type": "module",
   "engines": {
     "node": ">=18.19.1"
